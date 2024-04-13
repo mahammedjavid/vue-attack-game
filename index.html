@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Game</title>
+</head>
+
+<body>
+
+    <div id="app" style="width: 50%;margin: auto;border: 1px solid gray;padding: 20px;">
+        <h2 style="text-align: center;">Attack game</h2>
+
+        <div>
+            <p>Monster</p>
+            <p :class="['health']" :style="monsterhealth"></p>
+            <p>Player</p>
+            <p :class="['health']" :style="playerhealth"></p>
+        </div>
+
+        <hr>
+
+        <div style="text-align: center;font-weight: bold;" v-if="gameMessage">
+            {{gameMessage}} - <button @click="restartGame">Restart</button>
+        </div>
+
+        <div v-else style="display: flex;flex-direction: column;width: 20%;margin: auto;">
+            <button @click="attackMonster">Attack</button>
+            <button @click="specialAttackMonster">Special Attack</button>
+            <button @click="heal">Heal</button>
+            <button @click="surrender">Surrender</button>
+        </div>
+
+        <hr>
+
+        <div>
+            <h5 style="text-align: center;">Logs</h5>
+            <ul>
+                <li v-for="log of logsData"><span
+                        :class="[{'special-attack' :log.what ==='special-attack'},{'attack' :log.what ==='attack'} , {'heal' :log.what ==='heal'}]">{{log.what}}</span>
+                    - <span>{{log.attack}}</span> - <span>{{log.attackValue}}</span></li>
+            </ul>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="/script.js"></script>
+</body>
+
+</html>
